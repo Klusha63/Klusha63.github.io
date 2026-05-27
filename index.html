@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>StudioKiss | Профессиональная фотостудия</title>
+    <!-- Meta SEO и Analytics (Yandex Metrika + базовый SEO плагин) -->
+    <meta name="description" content="Студия Kiss — креативное пространство для фотосъемок, мероприятий и вдохновения. Интерьерные студии, профессиональное оборудование, выгодные цены.">
+    <meta name="keywords" content="фотостудия, аренда студии, фотограф, мероприятие, интерьерная студия, студия киев">
+    <meta name="author" content="StudioKiss">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph / соцсети -->
+    <meta property="og:title" content="StudioKiss – Ваша идеальная фотостудия">
+    <meta property="og:description" content="Красивые интерьеры, современное оборудование, уютная атмосфера для съемок и праздников.">
+    <meta property="og:image" content="https://placehold.co/1200x630/f7c1d9/fff?text=StudioKiss">
+    <meta property="og:type" content="website">
+    <!-- Yandex Metrica (аналог Google Analytics) -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(98765432, "init", { // демо ID, при необходимости заменить
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/98765432" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- Schema.org для SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PhotographyStudio",
+      "name": "StudioKiss",
+      "image": "https://placehold.co/800x600/f7c1d9/fff?text=Studio+Kiss",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Творческая, 15",
+        "addressLocality": "Москва",
+        "addressRegion": "RU"
+      },
+      "telephone": "+7 (999) 123-45-67",
+      "email": "hello@studiokiss.ru"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #FFF9FB;
+            color: #2e2e2e;
+            line-height: 1.4;
+        }
+        /* цветовая гамма: нежно-розовый + глубокий бордовый + акцент золотой */
+        :root {
+            --primary: #D96C8C;
+            --primary-dark: #B84A6A;
+            --secondary: #FFE0E8;
+            --accent: #E6B17E;
+            --dark: #2D2A2C;
+            --light: #FDF6F9;
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .container { padding: 0 16px; }
+        }
+        /* header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+            background: rgba(255,255,245,0.96);
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 16px 0;
+            gap: 12px;
+        }
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary), #b9466c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .contact-info {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .contact-info a {
+            font-weight: 500;
+            color: var(--dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            font-size: 1.3rem;
+        }
+        nav {
+            background: var(--light);
+            border-top: 1px solid #f0e0e6;
+            border-bottom: 1px solid #f0e0e6;
+            padding: 8px 0;
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-weight: 600;
+            padding: 8px 0;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        /* кнопки */
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(217,108,140,0.25);
+        }
+        /* Секции */
+        section {
+            margin: 70px 0;
+        }
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .section-title:after {
+            content: '';
+            width: 70px;
+            height: 4px;
+            background: var(--accent);
+            display: block;
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+        /* галерея баннер анимированный */
+        .banner-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            aspect-ratio: 16/9;
+            max-height: 550px;
+        }
+        .slides {
+            display: flex;
+            width: 300%;
+            animation: slideAnimation 16s infinite ease-in-out;
+        }
+        .slide {
+            width: 33.333%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 30px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: bold;
+            font-size: 1.6rem;
+        }
+        @keyframes slideAnimation {
+            0%, 25% { transform: translateX(0); }
+            33%, 58% { transform: translateX(-33.333%); }
+            66%, 91% { transform: translateX(-66.666%); }
+            100% { transform: translateX(0); }
+        }
+        /* услуги карточки */
+        .services-grid, .studio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .service-card, .studio-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.25s;
+        }
+        .service-card:hover, .studio-card:hover {
+            transform: translateY(-8px);
+        }
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin: 10px 0;
+        }
+        /* форма */
+        .form-order {
+            background: #fff2f6;
+            padding: 36px;
+            border-radius: 32px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2cbd3;
+            border-radius: 40px;
+            font-size: 1rem;
+            background: white;
+        }
+        /* фильтр и пагинация на услуги */
+        .filter-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: #f1e3e8;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+        }
+        .page-btn {
+            background: #f3e2e8;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        .page-btn.active-page {
+            background: var(--primary);
+            color: white;
+        }
+        /* футер */
+        .footer {
+            background: #2D2A2C;
+            color: #e5cfd7;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        .footer a {
+            color: #ecc5d2;
+        }
+        .footer a:hover {
+            color: white;
+        }
+        /* адаптив меню */
+        @media (max-width: 768px) {
+            .header-top { flex-direction: column; text-align: center; }
+            .nav-links { gap: 16px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-top">
+        <div class="logo"><h1>📸 StudioKiss</h1></div>
+        <div class="contact-info">
+            <a href="tel:+79991234567">📞 +7 (999) 123-45-67</a>
+            <a href="mailto:hello@studiokiss.ru">✉️ hello@studiokiss.ru</a>
+        </div>
+        <div class="social-icons">
+            <a href="#" aria-label="instagram">📷 IG</a>
+            <a href="#" aria-label="telegram">💬 TG</a>
+            <a href="#" aria-label="vk">🎬 VK</a>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#order-form">Заказать</a></li>
+                <li><a href="services-page.html" id="servicesLink">Наши услуги</a></li>
+                <li><a href="#studios">Интерьерные студии</a></li>
+                <li><a href="#contact-page">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="container" id="home">
+    <!-- Блок галерея анимированная (баннер) -->
+    <section id="gallery">
+        <div class="banner-slider">
+            <div class="slides">
+                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('https://placehold.co/1200x700/f7c1d9/fff?text=LOVE+STORY+СЪЕМКА'); background-size: cover;">✨ Романтическая съемка</div>
+                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url('https://placehold.co/1200x700/D96C8C/fff?text=STUDIO+KISS+ПРЕМИУМ'); background-size: cover;">🌟 Профессиональный свет</div>
+                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('https://placehold.co/1200x700/E6B17E/fff?text=ИНТЕРЬЕРНЫЕ+СТУДИИ'); background-size: cover;">🏛️ Уникальные декорации</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Заказать мероприятие форма -->
+    <section id="order-form">
+        <h2 class="section-title">✨ Заказать мероприятие</h2>
+        <div class="form-order">
+            <form id="eventForm">
+                <div class="form-group"><select id="eventType" required><option value="">Тип мероприятия</option><option>Фотосессия</option><option>Свадьба</option><option>День рождения</option><option>Корпоратив</option><option>Видеосъемка</option></select></div>
+                <div class="form-group"><input type="text" id="fullname" placeholder="Ваше ФИО" required></div>
+                <div class="form-group"><input type="tel" id="phone" placeholder="Телефон" required></div>
+                <div class="form-group"><input type="email" id="email" placeholder="Электронная почта" required></div>
+                <div class="form-group"><input type="date" id="eventDate" required></div>
+                <button type="submit" class="btn" style="width:100%">Отправить заявку</button>
+                <p id="formMessage" style="margin-top:12px; font-size:0.9rem; text-align:center;"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Блок меню: О нас, Услуги, Контакты (сокращенные ссылки) -->
+    <div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+        <a href="#about" class="btn btn-outline">📖 О нас</a>
+        <a href="services-page.html" class="btn btn-outline">📸 Наши услуги</a>
+        <a href="#contact-page" class="btn btn-outline">📍 Контакты</a>
+    </div>
+
+    <!-- Наши услуги - выводим не более 3х -->
+    <section>
+        <h2 class="section-title">Наши услуги</h2>
+        <div class="services-grid" id="previewServices">
+            <!-- 3 услуги загружаются динамически -->
+        </div>
+    </section>
+
+    <!-- Интерьерные студии анимированный баннер (карусель текста) -->
+    <section id="studios">
+        <h2 class="section-title">Интерьерные студии</h2>
+        <div class="banner-slider" style="height: auto; min-height: 320px; background: #faeef3;">
+            <div class="slides" style="animation: slideAnimation 12s infinite; width: 300%; display: flex;">
+                <div class="slide" style="background: #b84a6a; color:white; flex-direction:column; justify-content:center;"><h3>🌸 «Розовый рассвет»</h3><p>Уютная студия с богемным стилем, идеально для лавстори.</p><span class="price">от 1500₽/час</span></div>
+                <div class="slide" style="background: #e6b17e; color:#2d2d2d; flex-direction:column; justify-content:center;"><h3>🏛️ «Loft Minimal»</h3><p>Белые стены, высокие окна, светлая атмосфера.</p><span class="price">от 2000₽/час</span></div>
+                <div class="slide" style="background: #2D2A2C; color:#f7d9e4; flex-direction:column; justify-content:center;"><h3>🎬 «Кинопространство»</h3><p>Винтажные детали, неон, зеркала и профессиональный софтбокс.</p><span class="price">от 2500₽/час</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Страница "О нас" встроенная -->
+    <section id="about">
+        <h2 class="section-title">О нас</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+            <img src="https://placehold.co/500x400/f7c1d9/fff?text=StudioKiss+Team" alt="Команда StudioKiss" style="border-radius: 32px; width:100%; max-width: 400px; object-fit: cover;">
+            <div style="flex:1"><p style="font-size: 1.2rem; line-height:1.5">StudioKiss — это пространство, где рождаются эмоции и искусство. Мы основали студию в 2018 году с любовью к фотографии и красивому дизайну. Наши интерьеры меняются каждый сезон, профессиональное оборудование и свет всегда доступны. Провели более 1000 съемок, свадеб, тимбилдингов и творческих встреч. Вдохновляем и создаем магию кадра вместе с каждым гостем. 💋</p></div>
+        </div>
+    </section>
+
+    <!-- Страница контактов -->
+    <section id="contact-page">
+        <h2 class="section-title">Контакты</h2>
+        <div style="background: #fff5f8; border-radius: 32px; padding: 32px; display: flex; flex-wrap: wrap; gap: 30px;">
+            <div style="flex:1"><h3>📍 Адрес</h3><p>г. Москва, ул. Творческая, д. 15, стр. 4 (м. Достоевская)</p><h3>📞 Телефон</h3><p><a href="tel:+79991234567">+7 (999) 123-45-67</a></p><h3>✉️ Email</h3><p><a href="mailto:hello@studiokiss.ru">hello@studiokiss.ru</a></p><h3>⏰ Режим работы</h3><p>Ежедневно 10:00 – 22:00</p></div>
+            <div style="flex:1"><iframe width="100%" height="220" style="border:0; border-radius:24px" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Москва+Творческая+15&language=ru"></iframe></div>
+        </div>
+    </section>
+</main>
+
+<!-- Страница Услуги с фильтрацией и пагинацией (динамический модуль) -->
+<div id="servicesFullPage" style="display:none;"></div>
+<script>
+    // Полноценная страница услуг: фильтрация + пагинация
+    const allServices = [
+        { id:1, cat:"Фотосессия", name:"Love Story", desc:"Романтическая съемка в студии или на натуре.", price:"от 5000₽", img:"https://placehold.co/400x300/f7c1d9/fff?text=Love+Story" },
+        { id:2, cat:"Фотосессия", name:"Портрет", desc:"Индивидуальный подход, работа с характером.", price:"4000₽", img:"https://placehold.co/400x300/e6b17e/fff?text=Portrait" },
+        { id:3, cat:"Видео", name:"Свадебный клип", desc:"Красивый монтаж, съемка love-story.", price:"от 15000₽", img:"https://placehold.co/400x300/b84a6a/fff?text=Wedding+Video" },
+        { id:4, cat:"Видео", name:"Рекламный ролик", desc:"Видео для соцсетей и бренда.", price:"от 20000₽", img:"https://placehold.co/400x300/2D2A2C/fff?text=Ad+Video" },
+        { id:5, cat:"Мероприятие", name:"Фотограф на праздник", desc:"4 часа, репортажка, обработка 100 фото.", price:"12000₽", img:"https://placehold.co/400x300/D96C8C/fff?text=Party" }
+    ];
+    let currentFilter = "all";
+    let currentPage = 1;
+    const itemsPerPage = 3;
+
+    function renderServicesPage() {
+        let filtered = currentFilter === "all" ? allServices : allServices.filter(s => s.cat === currentFilter);
+        const totalPages = Math.ceil(filtered.length / itemsPerPage);
+        const start = (currentPage-1)*itemsPerPage;
+        const paginated = filtered.slice(start, start+itemsPerPage);
+        const servicesHTML = paginated.map(s => `
+            <div class="service-card"><img class="card-img" src="${s.img}" alt="${s.name}"><div class="card-content"><h3>${s.name}</h3><p>${s.desc}</p><div class="price">${s.price}</div></div></div>
+        `).join('');
+        document.getElementById("servicesContainer").innerHTML = servicesHTML || "<p>Услуг не найдено</p>";
+        // пагинация кнопки
+        let paginationHtml = '';
+        for(let i=1; i<=totalPages; i++) {
+            paginationHtml += `<button class="page-btn ${i===currentPage ? 'active-page' : ''}" data-page="${i}">${i}</button>`;
+        }
+        document.getElementById("paginationControls").innerHTML = paginationHtml;
+        document.querySelectorAll(".page-btn").forEach(btn => btn.addEventListener("click", (e) => {
+            currentPage = parseInt(btn.dataset.page);
+            renderServicesPage();
+            window.scrollTo({top: document.getElementById("servicesFullContainer").offsetTop - 70, behavior: "smooth"});
+        }));
+    }
+
+    // Инициализация при клике на услуги, либо загрузка полной страницы
+    function loadServicesPage() {
+        const mainContent = document.querySelector("main");
+        const existingServicesDiv = document.getElementById("servicesFullPage");
+        if(!existingServicesDiv) return;
+        mainContent.style.display = "none";
+        const fullDiv = document.getElementById("servicesFullPage");
+        fullDiv.style.display = "block";
+        fullDiv.innerHTML = `<div class="container" id="servicesFullContainer"><h2 class="section-title">Наши услуги</h2>
+            <div class="filter-buttons" id="filterSection"><button class="filter-btn active" data-filter="all">Все</button><button class="filter-btn" data-filter="Фотосессия">Фотосессия</button><button class="filter-btn" data-filter="Видео">Видео</button><button class="filter-btn" data-filter="Мероприятие">Мероприятие</button></div>
+            <div id="servicesContainer" class="services-grid" style="display:grid;"></div><div id="paginationControls" class="pagination"></div><br><button id="backHomeBtn" class="btn">← На главную</button></div>`;
+        renderServicesPage();
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                currentFilter = btn.dataset.filter;
+                currentPage = 1;
+                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                renderServicesPage();
+            });
+        });
+        document.getElementById("backHomeBtn")?.addEventListener("click", () => {
+            fullDiv.style.display = "none";
+            mainContent.style.display = "block";
+            window.scrollTo(0,0);
+        });
+    }
+
+    // Обработчик навигации ссылки услуги
+    document.getElementById("servicesLink")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        const fullDiv = document.getElementById("servicesFullPage");
+        if(fullDiv) loadServicesPage();
+        else window.location.href = "#";
+    });
+    // Также поддержка главного блока услуг (три предпросмотра)
+    function renderPreviewServices() {
+        const previewDiv = document.getElementById("previewServices");
+        if(previewDiv) {
+            const firstThree = allServices.slice(0,3);
+            previewDiv.innerHTML = firstThree.map(s => `<div class="service-card"><img class="card-img" src="${s.img}"><div class="card-content"><h3>${s.name}</h3><p>${s.desc.substring(0,60)}</p><div class="price">${s.price}</div><a href="#" class="btn-outline" style="display:inline-block; margin-top:8px;">Подробнее →</a></div></div>`).join('');
+        }
+    }
+    renderPreviewServices();
+
+    // Форма заказа мероприятия
+    const form = document.getElementById("eventForm");
+    if(form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const msg = document.getElementById("formMessage");
+            msg.style.color = "green";
+            msg.innerHTML = "✅ Заявка отправлена! Менеджер свяжется с вами в ближайшее время ❤️";
+            form.reset();
+            setTimeout(()=> msg.innerHTML="", 4000);
+        });
+    }
+
+    // Навигация по якорям и скрытие servicesFullPage при клике на другие пункты меню (кроме услуги)
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", (e) => {
+            const href = link.getAttribute("href");
+            if(href && href !== "services-page.html") {
+                const fullDiv = document.getElementById("servicesFullPage");
+                if(fullDiv && fullDiv.style.display === "block") {
+                    fullDiv.style.display = "none";
+                    document.querySelector("main").style.display = "block";
+                }
+                if(href.startsWith("#")) return;
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const target = document.getElementById(targetId);
+                if(target) target.scrollIntoView({behavior:"smooth"});
+            }
+        });
+    });
+    // Делаем страницу услуг полной функциональности + если кто-то нажал из блока меню
+    document.querySelectorAll('.nav-links a[href="services-page.html"]').forEach(el => el.addEventListener("click", (e) => { e.preventDefault(); loadServicesPage(); }));
+    // дополнительно адаптив: mobile friend
+</script>
+
+<div id="servicesFullPage" style="display:none;"></div>
+<footer class="footer">
+    <div class="container footer-grid">
+        <div><h4>StudioKiss</h4><p>Творческая студия для ваших идей</p></div>
+        <div><h4>Меню</h4><ul style="list-style:none;"><li><a href="#home">Главная</a></li><li><a href="#about">О нас</a></li><li><a href="#gallery">Галерея</a></li><li><a href="#order-form">Заказать</a></li><li><a href="services-page.html">Услуги</a></li><li><a href="#studios">Студии</a></li><li><a href="#contact-page">Контакты</a></li></ul></div>
+        <div><h4>Реквизиты</h4><p>ИП Студио Кисс<br>ИНН 7701234567<br>ОГРН 318774900001234</p></div>
+        <div><h4>Соцсети</h4><a href="#">Instagram</a> • <a href="#">Telegram</a> • <a href="#">VK</a></div>
+    </div>
+    <div class="container" style="text-align:center; margin-top:30px;">© 2025 StudioKiss — любовь в каждом кадре</div>
+</footer>
+</body>
+</html>
