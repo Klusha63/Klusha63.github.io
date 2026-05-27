@@ -369,7 +369,7 @@
                 <li><a href="#about">О нас</a></li>
                 <li><a href="#gallery">Галерея</a></li>
                 <li><a href="#order-form">Заказать</a></li>
-                <li><a href="services-preview" id="servicesLink">Наши услуги</a></li>
+                <li><a href="services-selection" id="servicesLink">Наши услуги</a></li>
                 <li><a href="#studios">Интерьерные студии</a></li>
                 <li><a href="#contact-page">Контакты</a></li>
             </ul>
@@ -402,12 +402,12 @@
     <!-- Блок меню: О нас, Услуги, Контакты (сокращенные ссылки) -->
     <div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
         <a href="#about" class="btn btn-outline">📖 О нас</a>
-        <a href="services-preview" class="btn btn-outline">📸 Наши услуги</a>
+        <a href="services-page" class="btn btn-outline">📸 Наши услуги</a>
         <a href="#contact-page" class="btn btn-outline">📍 Контакты</a>
     </div>
 
     <!-- Наши услуги - выводим не более 3х -->
-    <section id="services-preview">
+    <section id="services-selection">
         <h2 class="section-title">Наши услуги</h2>
         <div class="services-grid" id="previewServices">
             <!-- 3 услуги загружаются динамически -->
@@ -465,89 +465,7 @@
         </div>
     </section>
 </main>
-
-<!-- Страница Услуги с фильтрацией и пагинацией (динамический модуль) -->
-<div id="servicesFullPage" style="display:none;"></div>
-<script>
-    // Полноценная страница услуг: фильтрация + пагинация
-    const allServices = [
-        { id:1, cat:"Фотосессия", name:"Love Story", desc:"Романтическая съемка в студии или на натуре.", price:"от 5000₽", img:"https://placehold.co/400x300/f7c1d9/fff?text=Love+Story" },
-        { id:2, cat:"Фотосессия", name:"Портрет", desc:"Индивидуальный подход, работа с характером.", price:"4000₽", img:"https://placehold.co/400x300/e6b17e/fff?text=Portrait" },
-        { id:3, cat:"Видео", name:"Свадебный клип", desc:"Красивый монтаж, съемка love-story.", price:"от 15000₽", img:"https://placehold.co/400x300/b84a6a/fff?text=Wedding+Video" },
-        { id:4, cat:"Видео", name:"Рекламный ролик", desc:"Видео для соцсетей и бренда.", price:"от 20000₽", img:"https://placehold.co/400x300/2D2A2C/fff?text=Ad+Video" },
-        { id:5, cat:"Мероприятие", name:"Фотограф на праздник", desc:"4 часа, репортажка, обработка 100 фото.", price:"12000₽", img:"https://placehold.co/400x300/D96C8C/fff?text=Party" }
-    ];
-    let currentFilter = "all";
-    let currentPage = 1;
-    const itemsPerPage = 3;
-
-    function renderServicesPage() {
-        let filtered = currentFilter === "all" ? allServices : allServices.filter(s => s.cat === currentFilter);
-        const totalPages = Math.ceil(filtered.length / itemsPerPage);
-        const start = (currentPage-1)*itemsPerPage;
-        const paginated = filtered.slice(start, start+itemsPerPage);
-        const servicesHTML = paginated.map(s => `
-            <div class="service-card"><img class="card-img" src="${s.img}" alt="${s.name}"><div class="card-content"><h3>${s.name}</h3><p>${s.desc}</p><div class="price">${s.price}</div></div></div>
-        `).join('');
-        document.getElementById("servicesContainer").innerHTML = servicesHTML || "<p>Услуг не найдено</p>";
-        // пагинация кнопки
-        let paginationHtml = '';
-        for(let i=1; i<=totalPages; i++) {
-            paginationHtml += `<button class="page-btn ${i===currentPage ? 'active-page' : ''}" data-page="${i}">${i}</button>`;
-        }
-        document.getElementById("paginationControls").innerHTML = paginationHtml;
-        document.querySelectorAll(".page-btn").forEach(btn => btn.addEventListener("click", (e) => {
-            currentPage = parseInt(btn.dataset.page);
-            renderServicesPage();
-            window.scrollTo({top: document.getElementById("servicesFullContainer").offsetTop - 70, behavior: "smooth"});
-        }));
-    }
-
-    // Инициализация при клике на услуги, либо загрузка полной страницы
-    function loadServicesPage() {
-        const mainContent = document.querySelector("main");
-        const existingServicesDiv = document.getElementById("servicesFullPage");
-        if(!existingServicesDiv) return;
-        mainContent.style.display = "none";
-        const fullDiv = document.getElementById("servicesFullPage");
-        fullDiv.style.display = "block";
-        fullDiv.innerHTML = `<div class="container" id="servicesFullContainer"><h2 class="section-title">Наши услуги</h2>
-            <div class="filter-buttons" id="filterSection"><button class="filter-btn active" data-filter="all">Все</button><button class="filter-btn" data-filter="Фотосессия">Фотосессия</button><button class="filter-btn" data-filter="Видео">Видео</button><button class="filter-btn" data-filter="Мероприятие">Мероприятие</button></div>
-            <div id="servicesContainer" class="services-grid" style="display:grid;"></div><div id="paginationControls" class="pagination"></div><br><button id="backHomeBtn" class="btn">← На главную</button></div>`;
-        renderServicesPage();
-        document.querySelectorAll(".filter-btn").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                currentFilter = btn.dataset.filter;
-                currentPage = 1;
-                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                renderServicesPage();
-            });
-        });
-        document.getElementById("backHomeBtn")?.addEventListener("click", () => {
-            fullDiv.style.display = "none";
-            mainContent.style.display = "block";
-            window.scrollTo(0,0);
-        });
-    }
-
-    // Обработчик навигации ссылки услуги
-    document.getElementById("servicesLink")?.addEventListener("click", (e) => {
-        e.preventDefault();
-        const fullDiv = document.getElementById("servicesFullPage");
-        if(fullDiv) loadServicesPage();
-        else window.location.href = "#";
-    });
-    // Также поддержка главного блока услуг (три предпросмотра)
-    function renderPreviewServices() {
-        const previewDiv = document.getElementById("previewServices");
-        if(previewDiv) {
-            const firstThree = allServices.slice(0,3);
-            previewDiv.innerHTML = firstThree.map(s => `<div class="service-card"><img class="card-img" src="${s.img}"><div class="card-content"><h3>${s.name}</h3><p>${s.desc.substring(0,60)}</p><div class="price">${s.price}</div><a href="#" class="btn-outline" style="display:inline-block; margin-top:8px;">Подробнее →</a></div></div>`).join('');
-        }
-    }
-    renderPreviewServices();
-
+    <script>
     // Форма заказа мероприятия
     const form = document.getElementById("eventForm");
     if(form) {
@@ -561,38 +479,30 @@
         });
     }
 
-    // Навигация по якорям и скрытие servicesFullPage при клике на другие пункты меню (кроме услуги)
-    document.querySelectorAll(".nav-links a").forEach(link => {
-        link.addEventListener("click", (e) => {
-            const href = link.getAttribute("href");
-            if(href && href !== "services-page.html") {
-                const fullDiv = document.getElementById("servicesFullPage");
-                if(fullDiv && fullDiv.style.display === "block") {
-                    fullDiv.style.display = "none";
-                    document.querySelector("main").style.display = "block";
-                }
-                if(href.startsWith("#")) return;
+    // Отображение 3 услуг на главной
+    const allServices = [
+        { id:1, cat:"Фотосессия", name:"Love Story", desc:"Романтическая съемка в студии или на натуре.", price:"от 5000₽", img:"https://placehold.co/400x300/f7c1d9/fff?text=Love+Story" },
+        { id:2, cat:"Фотосессия", name:"Портрет", desc:"Индивидуальный подход, работа с характером.", price:"4000₽", img:"https://placehold.co/400x300/e6b17e/fff?text=Portrait" },
+        { id:3, cat:"Видео", name:"Свадебный клип", desc:"Красивый монтаж, съемка love-story.", price:"от 15000₽", img:"https://placehold.co/400x300/b84a6a/fff?text=Wedding+Video" }
+    ];
+    
+    const previewDiv = document.getElementById("previewServices");
+    if(previewDiv) {
+        previewDiv.innerHTML = allServices.map(s => `<div class="service-card"><img class="card-img" src="${s.img}"><div class="card-content"><h3>${s.name}</h3><p>${s.desc.substring(0,60)}</p><div class="price">${s.price}</div><a href="#" class="btn-outline" style="display:inline-block; margin-top:8px;">Подробнее →</a></div></div>`).join('');
+    }
+
+    // Плавная прокрутка для всех якорных ссылок
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if(href === "#" || href === "") return;
+            const target = document.querySelector(href);
+            if(target) {
                 e.preventDefault();
-                const targetId = href.substring(1);
-                const target = document.getElementById(targetId);
-                if(target) target.scrollIntoView({behavior:"smooth"});
+                target.scrollIntoView({ behavior: 'smooth' });
             }
         });
     });
-    // Делаем страницу услуг полной функциональности + если кто-то нажал из блока меню
-    document.querySelectorAll('.nav-links a[href="services-page.html"]').forEach(el => el.addEventListener("click", (e) => { e.preventDefault(); loadServicesPage(); }));
-    // дополнительно адаптив: mobile friend
 </script>
-
-<div id="servicesFullPage" style="display:none;"></div>
-<footer class="footer">
-    <div class="container footer-grid">
-        <div><h4>StudioKiss</h4><p>Творческая студия для ваших идей</p></div>
-        <div><h4>Меню</h4><ul style="list-style:none;"><li><a href="#home">Главная</a></li><li><a href="#about">О нас</a></li><li><a href="#gallery">Галерея</a></li><li><a href="#order-form">Заказать</a></li><li><a href="services-page.html">Услуги</a></li><li><a href="#studios">Студии</a></li><li><a href="#contact-page">Контакты</a></li></ul></div>
-        <div><h4>Реквизиты</h4><p>ИП Студио Кисс<br>ИНН 7701234567<br>ОГРН 318774900001234</p></div>
-        <div><h4>Соцсети</h4><a href="#">Instagram</a> • <a href="#">Telegram</a> • <a href="#">VK</a></div>
-    </div>
-    <div class="container" style="text-align:center; margin-top:30px;">© 2025 StudioKiss — любовь в каждом кадре</div>
-</footer>
 </body>
 </html>
